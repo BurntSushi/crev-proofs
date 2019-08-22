@@ -1,0 +1,17 @@
+-----BEGIN CREV TRUST -----
+version: -1
+date: "2019-08-22T18:59:08.283024413-04:00"
+from:
+  id-type: crev
+  id: VylyTuk8CMGqIxgHixWaqfiUn3xZyzOA1wFrQ0sR1As
+  url: "https://github.com/BurntSushi/crev-proofs"
+ids:
+  - id-type: crev
+    id: FYlr8YoYGVvDwHQxqEIs89reKKDy-oWisoO0qXXEfHE
+    url: "https://github.com/dpc/crev-proofs"
+trust: medium
+comment: "dpc is the author of cargo-crev, so it only makes sense to trust them.\n"
+-----BEGIN CREV TRUST SIGNATURE-----
+66DZVlMG3-5hbKUFK4IZGEIbUafxxipzPmQyKZa4XpaZxdwVF9nt5Rest1pY2l4yVeejRpQ7j9mSoEWYY4utBA
+-----END CREV TRUST-----
+
