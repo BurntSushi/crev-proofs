@@ -43,3 +43,54 @@ comment: |
 k9OhqAzmXsrZVASDN_k2H7l-RQm4sasBEtCn1qGl12txvkCDNgAfIipJbhiJxxajMq2Cx9PhZfBXCHxjqe6-AA
 -----END CREV PACKAGE REVIEW-----
 
+-----BEGIN CREV PACKAGE REVIEW-----
+version: -1
+date: "2019-08-22T19:39:15.333196905-04:00"
+from:
+  id-type: crev
+  id: VylyTuk8CMGqIxgHixWaqfiUn3xZyzOA1wFrQ0sR1As
+  url: "https://github.com/BurntSushi/crev-proofs"
+package:
+  source: "https://crates.io"
+  name: aho-corasick
+  version: 0.7.6
+  revision: f1bf13c9ba179733a172794507dcdd0539fa4269
+  digest: 4dvyEm-kmxXzGE2_36dIyFFH9y2Q47kF3Ae6ceXhdrA
+review:
+  thoroughness: high
+  understanding: high
+  rating: positive
+comment: |
+  I wrote this crate, so this review is a reflection as a result of writing the
+  code and then reviewing it again for this review.
+  
+  While the aho-corasick crate is not often used directly, it is a key
+  optimization technique used in the `regex` crate for quickly finding
+  potential matches by searching literals.
+  
+  I gave this crate a rating of `positive` instead of the highest `strong`
+  because it was somewhat recently rewritten. So it hasn't been thoroughly
+  vetted yet.
+  
+  At a higher level, one concern point of this crate is that it has a lot of
+  `unsafe` usage. While a small number of those `unsafe` uses are for the
+  Aho-Corasick algorithm itself---mostly for explicitly eliding bounds checks
+  for performance reasons---the vast majority of all `unsafe` uses are for the
+  implementation of the Teddy algorithm, which makes heavy use of SIMD through
+  explicit CPU specific vendor intrinsics. The Teddy algorithm is used as a
+  fast prefilter to quickly find potential matches when searching for a smaller
+  number of patterns. The speedups can be an order of magnitude, so the extra
+  code complexity is worth it.
+  
+  As with the memchr crate, both the Aho-Corasick algorithm and the Teddy
+  algorithm are thoroughly tested. Both are tested independently of one another
+  and when they are used together. Like the memchr crate, the Teddy
+  algorithm is tested on a wide variety of haystack configurations to test
+  different haystack lengths and match positions, all of which can exercise
+  different aspects of the Teddy algorithm. If one counted the total number of
+  tests for the entire crate (including variations on each), it would easily
+  be in the tens of thousands.
+-----BEGIN CREV PACKAGE REVIEW SIGNATURE-----
+pwSedX-V7MFo_7UPSK40cvJaFcLffTpVv9xknp2kVOQyREK3g4XBhLCERxWELxKXw1VnwguHxJQaJtGK187MAA
+-----END CREV PACKAGE REVIEW-----
+
