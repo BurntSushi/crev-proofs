@@ -1,0 +1,45 @@
+-----BEGIN CREV PACKAGE REVIEW-----
+version: -1
+date: "2019-08-22T19:10:07.491610585-04:00"
+from:
+  id-type: crev
+  id: VylyTuk8CMGqIxgHixWaqfiUn3xZyzOA1wFrQ0sR1As
+  url: "https://github.com/BurntSushi/crev-proofs"
+package:
+  source: "https://crates.io"
+  name: memchr
+  version: 2.2.1
+  revision: 75155594dd6c130d47c944bbf31813f454d94341
+  digest: ae5zOlbfexMaCjagJcotoowq1Ql1mDNxtrIcHuGakjM
+review:
+  thoroughness: high
+  understanding: high
+  rating: strong
+comment: |
+  I wrote this crate, so this review is a reflection as a result of writing
+  the code and then reviewing it again for this review.
+  
+  The entire purpose of the memchr crate is to do this:
+  
+      haystack.iter().position(|&b| b == needle)
+  
+  ... but really fast. As a result, this crate uses SIMD via CPU specific
+  vendor intrinsics. Consequently, there is a lot of unsafe code in this
+  crate. There is really no way to avoid this, other than perhaps using a
+  higher level platform independent SIMD API. But no such thing of sufficient
+  quality exists for stable Rust at the time of writing.
+  
+  The testing strategy is the most important bit here. In particular, every
+  public API item is tested using a permutation of tests that exercise all
+  possible alignments found in a haystack. (Because the implementations used
+  aligned loads/stores, which are only correct if the address arithmetic is
+  correct.) Additionally, there are quickcheck tests that act as a sort of
+  fuzzer guaranteeing that the implementation is correct for a range of inputs.
+  
+  I gave the highest rating possible because of the extensive use this crate
+  has seen, in addition to its level of testing. In particular, memchr
+  underlies a significant chunk of all text search in the Rust ecosystem.
+-----BEGIN CREV PACKAGE REVIEW SIGNATURE-----
+k9OhqAzmXsrZVASDN_k2H7l-RQm4sasBEtCn1qGl12txvkCDNgAfIipJbhiJxxajMq2Cx9PhZfBXCHxjqe6-AA
+-----END CREV PACKAGE REVIEW-----
+
