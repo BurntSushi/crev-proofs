@@ -172,3 +172,38 @@ comment: |
 Ddmx5eKdL3h3YmEJJCVym02iS0InUFOQH4nVDCrbdN-XcKFLSu_0mIPs6bmLCo33UF_e9aosvpRl6B2lpfSPDA
 -----END CREV PACKAGE REVIEW-----
 
+-----BEGIN CREV PACKAGE REVIEW-----
+version: -1
+date: "2019-08-23T06:40:48.892265615-04:00"
+from:
+  id-type: crev
+  id: VylyTuk8CMGqIxgHixWaqfiUn3xZyzOA1wFrQ0sR1As
+  url: "https://github.com/BurntSushi/crev-proofs"
+package:
+  source: "https://crates.io"
+  name: regex
+  version: 1.2.1
+  revision: 0b1e1e8c54287d382e505acc68d983801daddeee
+  digest: ocH3h6Mkhx80kLs5NaA8LnoHj-5vO7Esk27gJBwXEt8
+review:
+  thoroughness: high
+  understanding: high
+  rating: positive
+comment: |
+  I wrote this crate, so this review is a reflection as a result of writing the
+  code and then reviewing it again for this review.
+  
+  I gave a rating of positive because the implementation in the regex crate has
+  remain mostly unchanged for a long period of time, so it has matured and been
+  battle tested. Moreover, the crate uses very little unsafe directly. The
+  only uses are in the DFA regex engine for explicitly eliding bounds checks
+  in very hot loops.
+  
+  A better rating is likely deserved, but there are still a few outstanding
+  bugs that can produce incorrect matches. In many cases, these bugs are a
+  result of optimizations using literal searches, which can be subtle and
+  difficult to get right.
+-----BEGIN CREV PACKAGE REVIEW SIGNATURE-----
+B2ytIApfPvGEtYKD4JSGNxi5aSVdUbTWA55rMJoZoDfeaA8uj4cfIWoXdtk6SmptxjcfbkFfOdj-98slpYWeCQ
+-----END CREV PACKAGE REVIEW-----
+
