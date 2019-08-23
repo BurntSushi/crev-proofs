@@ -94,3 +94,40 @@ comment: |
 pwSedX-V7MFo_7UPSK40cvJaFcLffTpVv9xknp2kVOQyREK3g4XBhLCERxWELxKXw1VnwguHxJQaJtGK187MAA
 -----END CREV PACKAGE REVIEW-----
 
+-----BEGIN CREV PACKAGE REVIEW-----
+version: -1
+date: "2019-08-22T19:53:17.672001511-04:00"
+from:
+  id-type: crev
+  id: VylyTuk8CMGqIxgHixWaqfiUn3xZyzOA1wFrQ0sR1As
+  url: "https://github.com/BurntSushi/crev-proofs"
+package:
+  source: "https://crates.io"
+  name: regex-syntax
+  version: 0.6.11
+  revision: 169783c1d6e045ff2ee418ea3556d09ed97e8f3c
+  digest: jpb-7eZGGg3VD4Qv8s64grLU-tFlXore5J-p4xG9JKg
+review:
+  thoroughness: high
+  understanding: high
+  rating: strong
+comment: |
+  I wrote this crate, so this review is a reflection as a result of writing
+  the code and then reviewing it again for this review.
+  
+  The regex-syntax crate is mostly an internal implementation detail of the
+  regex crate. It is exposed as a stand-alone crate for the occasional use
+  case where it is convenient to analyze the syntax of a regex. The primary
+  thing that the regex-syntax crate provides is a parser for the concrete
+  syntax supported by the `regex` crate.
+  
+  The regex-syntax crate is very large, but there is no unsafe used anywhere.
+  Moreover, it has no dependencies. That means that no matter what concrete
+  syntax is given, the worst that can happen is a panic. Memory safety should
+  be preserved (modulo bugs in the compiler or the standard library). On top of
+  that, the parser does not use explicit recursion and enforces a nest depth
+  by default, so it should generally be safe with respect to arbitrary input.
+-----BEGIN CREV PACKAGE REVIEW SIGNATURE-----
+pMl9VoBusVzqWKrDWdY7EkB93IJO7n-qws5-AzYHlFIvoYvBJIerm8xCAASYau1Vruilo2stJOCKmzIUcxeADA
+-----END CREV PACKAGE REVIEW-----
+
