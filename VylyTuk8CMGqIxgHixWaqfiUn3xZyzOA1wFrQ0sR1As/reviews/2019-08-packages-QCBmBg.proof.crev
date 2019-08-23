@@ -131,3 +131,44 @@ comment: |
 pMl9VoBusVzqWKrDWdY7EkB93IJO7n-qws5-AzYHlFIvoYvBJIerm8xCAASYau1Vruilo2stJOCKmzIUcxeADA
 -----END CREV PACKAGE REVIEW-----
 
+-----BEGIN CREV PACKAGE REVIEW-----
+version: -1
+date: "2019-08-22T20:08:43.486032665-04:00"
+from:
+  id-type: crev
+  id: VylyTuk8CMGqIxgHixWaqfiUn3xZyzOA1wFrQ0sR1As
+  url: "https://github.com/BurntSushi/crev-proofs"
+package:
+  source: "https://crates.io"
+  name: thread_local
+  version: 0.3.6
+  digest: ZFqLfovJbiB-qdGhcZ-cIqJMauR-pbY0UyJr0ds2H54
+review:
+  thoroughness: medium
+  understanding: medium
+  rating: positive
+comment: |
+  This crate was written by Amanieu d'Antras in response to my efforts to make
+  thread safe caching in the regex crate faster. The way to think about it is
+  "dynamic" thread local storage.
+  
+  The crate does use a fair amount of unsafe, and the reason for this is to
+  minimize latency as much as is possible. Each use of unsafe isn't
+  particularly tricky---it's mostly managing atomic access to a hash table.
+  With that said, it would be nice if each use of unsafe had a comment
+  explaining/justifying it. There are some comments scattered about making
+  reasonable arguments, but more would be good.
+  
+  This crate did have an issue a while back where if a program used the same
+  regex (for example) many times from many short lived threads, then the
+  cached data could grow without bound. Amanieu patched that issue a while
+  back by reusing thread ids. A thread id is tracked using normal TLS, which
+  is dropped when the thread is destroyed.
+  
+  I gave this crate a rating of positive because I cannot identify any issues
+  after reviewing the code, although, I am not completely certain that there
+  are no issues because of the use of unsafe code.
+-----BEGIN CREV PACKAGE REVIEW SIGNATURE-----
+Ddmx5eKdL3h3YmEJJCVym02iS0InUFOQH4nVDCrbdN-XcKFLSu_0mIPs6bmLCo33UF_e9aosvpRl6B2lpfSPDA
+-----END CREV PACKAGE REVIEW-----
+
