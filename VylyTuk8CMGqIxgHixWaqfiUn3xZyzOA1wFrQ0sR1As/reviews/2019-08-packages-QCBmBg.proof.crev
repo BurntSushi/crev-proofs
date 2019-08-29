@@ -207,3 +207,29 @@ comment: |
 B2ytIApfPvGEtYKD4JSGNxi5aSVdUbTWA55rMJoZoDfeaA8uj4cfIWoXdtk6SmptxjcfbkFfOdj-98slpYWeCQ
 -----END CREV PACKAGE REVIEW-----
 
+-----BEGIN CREV PACKAGE REVIEW-----
+version: -1
+date: "2019-08-28T20:36:24.694340048-04:00"
+from:
+  id-type: crev
+  id: VylyTuk8CMGqIxgHixWaqfiUn3xZyzOA1wFrQ0sR1As
+  url: "https://github.com/BurntSushi/crev-proofs"
+package:
+  source: "https://crates.io"
+  name: lazy_static
+  version: 1.4.0
+  revision: 421669662b35fcb455f2902daed2e20bbbba79b6
+  digest: 95REZRx8ItDao_V9l7sOsW9-OB6Jc5C7azc9mNC07fI
+review:
+  thoroughness: medium
+  understanding: high
+  rating: strong
+comment: |
+  The 1.4.0 release removes the hand-rolled unreachable hint in favor of
+  `unreachable_unchecked`, which was a new API introduced in Rust 1.27.
+  Otherwise, nothing substantial was changed, other than allowing some
+  deprecated APIs to support older versions of Rust.
+-----BEGIN CREV PACKAGE REVIEW SIGNATURE-----
+MbvH99FJXvZAWhto_bjaDAuI-Xw3nG8F-uKpDxsuPfLXuscHlPc7GD_IIIKWu033ZqfEEilytHY9v4lp5NkfBw
+-----END CREV PACKAGE REVIEW-----
+
